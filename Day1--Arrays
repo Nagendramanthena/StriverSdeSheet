@@ -40,3 +40,39 @@ class Solution {
     }
 }
 -----------------------------------------------------------------------------------
+
+
+Approach-2
+
+1.we use two arrays in this case
+2.one for rows and one for cols
+3. if matrix[i][j] == 0 them set rows[i] = 1,cols[i]=1;
+4.at last set entire matrix
+
+Tc - O(MN)
+sc - O(M+N)
+----------------------------------------------------------------------------------------
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        
+        int rows[] = new int[n];
+        int cols[] = new int[m];
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j] == 0){
+                    rows[i]=1;cols[j]=1;
+                }
+            }
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(rows[i] == 1 || cols[j] == 1)matrix[i][j] = 0;
+            }
+        }
+        
+    }
+}
+---------------------------------------------------------------------------------------
