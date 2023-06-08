@@ -1,1 +1,1 @@
-# StriverSdeSheet contains all the approaches and codes of all the problems in striversdhsheet
+# StriverSdeSheet contains all the approaches and codes of all the problems in striversdesheet
