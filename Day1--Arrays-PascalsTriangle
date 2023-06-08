@@ -1,1 +1,126 @@
+Variation-1
+
+// find out the number at given row and column in the pascals triangle
+
+
+Method-1 create the entire pascals triangle
+Method-2 Use Ncr where N = r-1 and r = c-1;
+
+Finding Ncr
+BruteForce -- > Use the direct formula and generate factorials
+Optimized Ncr = N*(N-1)*(N-2)*(N-r-1)/(r*(r-1)*(r-2)
+
+////////////code for optimizedone////////////////////////////////////////////////////////
+for(int i=0;i<r;i++){
+ans *= (n-r);
+ans /= (r+1);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+Variation-2
+
+//find out the nth row of the pascals triangle
+
+//Maethod-1
+find out each element using Ncr
+
+Tc - O(N*R)
+
+//method-2
+
+long ans = 1;
+        System.out.print(ans + " "); // printing 1st element
+
+        // Printing the rest of the part:
+        for (int i = 1; i < n; i++) {
+            ans = ans * (n - i);
+            ans = ans / i;
+            System.out.print(ans + " ");
+        }
+        System.out.println();
+        
+Tc - O(N)
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+Variation-3
+
+find out entire pascals triangle
+
+
+Method-1
+Find all elements using Ncr
+-----------------------------------------------code--------------------------------------------------------
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> pt = new ArrayList<>();
+        //System.out.println(Ncr(2,1));
+        for(int i=0;i<numRows;i++){
+            List<Integer> temp  =new ArrayList<>();
+            for(int j=0;j<i+1;j++){
+                int size = temp.size();
+                temp.add(size,Ncr(i,j));
+            }
+            pt.add(pt.size(),temp);
+        }
+        return pt;
+    }
+    
+    public int Ncr(int n,int r){
+        double res =1;
+        for(int i=0;i<r;i++){
+            res *= (double)(n-i);
+            res /= (double)(i+1);
+        }
+        
+        return (int)res;
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+Optimized one
+
+
+import java.util.*;
+
+public class tUf {
+    public static List<Integer> generateRow(int row) {
+        long ans = 1;
+        List<Integer> ansRow = new ArrayList<>();
+        ansRow.add(1); //inserting the 1st element
+
+        //calculate the rest of the elements:
+        for (int col = 1; col < row; col++) {
+            ans = ans * (row - col);
+            ans = ans / col;
+            ansRow.add((int)ans);
+        }
+        return ansRow;
+    }
+
+    public static List<List<Integer>> pascalTriangle(int n) {
+        List<List<Integer>> ans = new ArrayList<>();
+
+        //store the entire pascal's triangle:
+        for (int row = 1; row <= n; row++) {
+            ans.add(generateRow(row));
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        List<List<Integer>> ans = pascalTriangle(n);
+        for (List<Integer> it : ans) {
+            for (int ele : it) {
+                System.out.print(ele + " ");
+            }
+            System.out.println();
+        }
+    }
+}
 
