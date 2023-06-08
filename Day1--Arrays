@@ -1,1 +1,42 @@
 
+Set-Matrix-Zeros
+
+
+Approach-1
+1.we use two loops to travserse the matrix.
+2.if we find '0' then we will set that entire row and column to -1 if it was not zero
+3.at last replace all -1s with zeros
+
+Tc - O(MN*(M+N))
+Sc - O(1)
+
+4.but this was a bad idea if then range of numbers in the range are from 2^-31 to 2^31
+
+
+code-----------------------------------------------------------------
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j] == 0){
+                    for(int k=0;k<m;k++){
+                        if(matrix[i][k]!=0)matrix[i][k]=Integer.MAX_VALUE;
+                    }
+                    for(int k=0;k<n;k++){
+                        if(matrix[k][j]!=0)matrix[k][j]=Integer.MAX_VALUE;
+                    }
+                }
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j] == Integer.MAX_VALUE)matrix[i][j]=0;
+            }
+        }
+    }
+}
+-----------------------------------------------------------------------------------
