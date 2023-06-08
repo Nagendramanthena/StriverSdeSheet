@@ -17,3 +17,22 @@ class Solution {
     }
 }
 ------------------code--------------------------------------------
+
+Approach-2
+
+Kadanes Algo
+
+--------------------code--------------------------------------
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int max = nums[0];int n = nums.length;
+        int currsum = nums[0];
+        for(int i=1;i<n;i++){
+            if(currsum<0)currsum = 0;
+            currsum += nums[i];
+             max = Math.max(max,currsum);
+        }
+        return max;
+    }
+}
+-----------------code-----------------------------------------
