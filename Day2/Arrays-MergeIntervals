@@ -1,0 +1,76 @@
+Approach-1
+1.Sort the intervals
+2.use two loops and and the appropraite intervals into the answer
+
+///////////////////////////code///////////////////////////////////////////
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        int n = intervals.length;
+        Arrays.sort(intervals,(a,b)->(a[0] == b[0])?a[1]-b[1]:a[0]-b[0]);
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            int start = intervals[i][0];
+            int end = intervals[i][1];
+            
+            
+            
+            if(ans.size()!=0 && ans.get(ans.size()-1).get(1)>=start)continue;
+            
+            
+            else{
+                for(int j=i+1;j<n;j++){
+                    if(intervals[j][0]<=end){
+                        end = Math.max(end,intervals[j][1]);
+                    }
+                    else break;
+                }
+                List<Integer> temp = new ArrayList<>();
+                temp.add(start);
+                temp.add(end);
+                ans.add(ans.size(),temp);
+            }
+            //System.out.println(start+" "+end);
+        }
+        int fans[][] = new int[ans.size()][2];
+        int i = 0;
+        for(List<Integer> temp:ans){
+            fans[i][0] = temp.get(0);
+            fans[i][1] = temp.get(1);
+            i++;
+        }
+        return fans;
+    }
+}
+////////////////////////////////////code////////////////////////////////////////
+
+Approach-2
+1.we will avoid that checking
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        int n = intervals.length;
+        Arrays.sort(intervals,(a,b)->(a[0] == b[0])?a[1]-b[1]:a[0]-b[0]);
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            if(ans.size() == 0 || ans.get(ans.size()-1).get(1)<intervals[i][0]){
+                List<Integer> temp = new ArrayList<>();
+                temp.add(intervals[i][0]);
+                temp.add(intervals[i][1]);
+                ans.add(ans.size(),temp);
+            }
+            else{
+                List<Integer> temp = ans.get(ans.size()-1);
+                int x = Math.max(temp.get(1),intervals[i][1]);
+                temp.set(1,x);
+            }
+        }
+        int fans[][] = new int[ans.size()][2];
+        int i = 0;
+        for(List<Integer> temp:ans){
+            fans[i][0] = temp.get(0);
+            fans[i][1] = temp.get(1);
+            i++;
+        }
+        return fans;
+    }
+}
