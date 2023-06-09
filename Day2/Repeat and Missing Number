@@ -1,0 +1,57 @@
+Approach1
+
+
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public ArrayList<Integer> repeatedNumber(final List<Integer> A) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        int n = A.size();
+        int re = 0;
+        int mis = 0;
+        for(int i=1;i<=n;i++){
+            int cnt = 0;
+            for(int j=0;j<n;j++){
+                if(A.get(j) == i)cnt++;
+            }
+            if(cnt == 2)re = i;
+            if(cnt == 0)mis = i;
+        }
+        ans.add(re);
+        ans.add(1,mis);
+        
+        return ans;
+    }
+}
+
+
+Approach2
+
+///////////////////code//////////////////////////////////////////////////////////
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public ArrayList<Integer> repeatedNumber(final List<Integer> A) {
+        int n = A.size();
+        ArrayList<Integer> ans = new ArrayList<>();
+        int arr[] = new int[n];
+        for(int i:A){
+            arr[i-1]++;
+        }
+        int rep = 0;
+        int mis = 0;
+        for(int i=0;i<n;i++){
+            if(arr[i] == 0)mis= i+1;
+            if(arr[i] == 2)rep = i+1;
+        }
+        ans.add(rep);
+        ans.add(1,mis);
+        return ans;
+    }
+}
+///////////////////////code////////////////////////////////////////////////////////
+
+
+
+Approach3
+
+
+/////////////////////////////////code//////////////////////////////////////////////
