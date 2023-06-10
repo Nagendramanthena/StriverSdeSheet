@@ -1,0 +1,37 @@
+Approach
+
+1.Linear-O(N)
+
+////////////////////////code////////////////////////
+class Solution {
+    public double myPow(double x, int n) {
+        double pow = 1.0;
+        long nn = Math.abs((long)n);
+        for(int i=0;i<nn;i++){
+            pow *= (x);
+        }
+        return (n>0?pow:(1.00/pow));
+    }
+    
+}
+///////////////////code/////////////////////////
+
+2.BinaryExponentation
+class Solution {
+    public double myPow(double x, int n) {
+        double pow = 1.0;
+        long nn = Math.abs((long)n);
+        while(nn>0){
+            if(nn%2 == 1){
+                pow = pow*x;
+                nn--;
+            }
+            else{
+                x *= x;
+                nn/=2;
+            }
+        }
+        return (n>0?pow:(1.00/pow));
+    }
+    
+}
