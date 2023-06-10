@@ -1,0 +1,34 @@
+Approach-1 
+O(N*N)
+
+Approach-2
+O(N) -->Hashing
+
+Approach-3
+
+Moore's voting
+
+//////////////code/////////////////
+class Solution {
+    public int majorityElement(int[] nums) {
+        int cnt = 1;
+        int ele=nums[0];
+        for(int i=1;i<nums.length;i++){
+            if(cnt == 0){
+                ele  =nums[i];
+            }
+            
+            if(nums[i] == ele)cnt++;
+            else cnt--;
+        }
+        
+        int cnt2 = nums.length/2+1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] == ele)cnt--;
+        }
+        if(cnt2>=0)return ele;
+        return -1;
+        
+    }
+}
+///////////////code///////////
