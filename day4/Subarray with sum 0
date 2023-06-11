@@ -1,0 +1,29 @@
+Approach1
+
+BruteForce
+
+Approach2
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if(nums.length == 0)return 0;
+        int n = nums.length;
+        int max = 1;
+        HashMap<Integer,Integer> hm  =new HashMap<>();
+        for(int i=0;i<n;i++){
+            hm.put(nums[i],1);
+        }
+        for(Map.Entry<Integer,Integer> me:hm.entrySet()){
+            int key = me.getKey();
+            if(!hm.containsKey(key-1)){
+                int x=1;
+                while(hm.containsKey(key+1)){
+                    x++;
+                    key++;
+                }
+                max = Math.max(max,x);
+            }
+        }
+        return max;
+    }
+}
