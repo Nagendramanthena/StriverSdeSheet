@@ -1,0 +1,38 @@
+Appraoch1
+
+Get all the elements in a new ArrayList
+and form a new lInkedList from the last
+
+
+Approach2
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode newhead = null;
+        while(head!=null){
+            ListNode next = head.next;
+            head.next = newhead;
+            newhead = head;
+            head = next;
+        }
+        return newhead;
+    }
+    
+}
+
+Approach3
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        return f(head);
+    }
+    
+    ListNode f(ListNode head){
+        if(head == null || head.next == null)return head;
+        
+        ListNode head1  = f(head.next);
+        head.next.next = head;
+        head.next = null;
+        return head1;
+        
+    }
+    
+}
