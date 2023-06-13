@@ -1,0 +1,47 @@
+Approach(very Naive😂😂😂)
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode temp = head;int size=0;
+        while(temp!=null){
+            size++;
+            if(size>Math.pow(10,4)){
+                return true;
+            }
+            temp = temp.next;
+            
+        }
+        return false;
+        
+    }
+}
+
+O(10^4)
+
+Approach2
+Hashing
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode fast = head;HashMap<ListNode,Integer> hm = new HashMap<>();
+        while(fast!=null){
+            if(hm.containsKey(fast))return true;
+            hm.put(fast,1);
+            fast = fast.next;
+        }
+        return false;
+        
+    }
+}
+Approach(slow fast pointers)
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode fast = head;ListNode slow = head;
+        
+        while(fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow)return true;
+        }
+        return false;
+        
+    }
+}
