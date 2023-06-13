@@ -1,0 +1,37 @@
+Approach (Hashing)
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+       HashMap<ListNode,Integer> hm = new HashMap<>();
+        while(head!=null){
+            if(hm.containsKey(head))return head;
+            hm.put(head,1);
+            head = head.next;
+        }
+        
+        return null;
+    }
+}
+
+Approach2
+
+Slow fast pointers
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        if(head == null || head.next == null)return null;
+       ListNode slow = head;
+        ListNode fast = head;
+        while(fast.next!=null && fast.next.next!=null){
+            fast = fast.next.next;
+            slow= slow.next;
+            if(fast == slow){
+                ListNode dummy = head;
+                while(dummy!=slow){
+                    slow = slow.next;
+                    dummy = dummy.next;
+                }
+                return dummy;
+            }
+        }
+        return null;
+    }
+}
