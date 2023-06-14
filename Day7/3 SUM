@@ -1,0 +1,50 @@
+Approach1
+ArrayList < ArrayList < Integer >> ans = new ArrayList < > ();
+
+        int i, j, k;
+        for (i = 0; i < nums.length - 2; i++) {
+            for (j = i + 1; j < nums.length - 1; j++) {
+                for (k = j + 1; k < nums.length; k++) {
+                    ArrayList < Integer > temp = new ArrayList < > ();
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(nums[k]);
+                    }
+                    if (temp.size() != 0)
+                        ans.add(temp);
+                }
+            }
+        }
+
+        return ans;
+Approach 2
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
+        for(int i=0;i<n;i++){
+            int j = i+1;int k = n-1;
+            if(i!=0 && nums[i] == nums[i-1])continue;
+            while(j<k){
+                long sum = (long)(nums[i])+(long)nums[j]+(long)nums[k];
+                
+                if(sum>0)k--;
+                else if(sum<0)j++;
+                
+                else {
+                List<Integer> temp = new ArrayList<>();
+                temp.add(nums[i]);temp.add(nums[j]);temp.add(nums[k]);
+                j++;
+                k--;
+                ans.add(temp);
+                while(j<k && nums[j] == nums[j-1])j++;
+                while(j<k && nums[k] == nums[k+1])k--;
+                     }
+            }
+        }
+        return ans;
+    }
+}
+        
