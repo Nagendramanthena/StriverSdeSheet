@@ -1,0 +1,15 @@
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int j =0;int n = nums.length;
+        int prev = Integer.MAX_VALUE;
+        for(int i=0;i<n;i++){
+            if(prev != nums[i]){
+                nums[j] = nums[i];
+                j++;
+            }
+            prev = nums[i];
+        }
+        return j;
+    }
+}
