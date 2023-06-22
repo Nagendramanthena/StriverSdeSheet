@@ -25,3 +25,32 @@ class Solution {
         //System.out.println(temp);
     }
 }
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        HashSet<List<Integer>> tempans = new HashSet<>();
+        f(tempans,new ArrayList<Integer>(),candidates,target,0);
+        List<List<Integer>> ans = new ArrayList<>(tempans);
+        return ans;
+    }
+    
+    public void f(HashSet<List<Integer>> ans,List<Integer> temp,int c[],int t,int index){
+        
+        if(t == 0){
+            ans.add(new ArrayList<>(temp));
+        }
+        if(index == c.length){
+            return;
+        }
+        
+        //pick
+        if(t-c[index]>=0){
+            temp.add(c[index]);
+            f(ans,temp,c,t-c[index],index+1);
+            temp.remove(temp.size()-1);
+        }
+        
+        f(ans,temp,c,t,index+1);
+    }
+}
