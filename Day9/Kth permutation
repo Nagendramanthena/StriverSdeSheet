@@ -1,0 +1,62 @@
+class Solution {
+    void f(List<Integer> rem,int k,StringBuilder ans){
+        if(k == 1){
+            for(int i:rem)ans.append(i);
+            return;
+        }
+        int size = rem.size();
+        int req = fact(size-1);
+        int skip = k/req;
+        if(k%req == 0){
+            ans.append(rem.get(k/req-1));
+            for(int i=size-1;i>=0;i--)if(i!=(k/req)-1)ans.append(rem.get(i));
+            return;
+        }
+        ans.append(rem.get(skip));
+        rem.remove(skip);
+        f(rem,k-(skip*req),ans);
+        
+    }
+    public String getPermutation(int n, int k) {
+        List<Integer> arr = new ArrayList<>();
+        for(int i=1;i<=n;i++)arr.add(arr.size(),i);
+        StringBuilder ans = new StringBuilder("");
+        if(k == fact(n)){
+            for(int i=n;i>=1;i--)ans.append(i);
+            return ans.toString();
+        }
+        f(arr,k,ans);
+        return ans.toString();
+    }
+    int fact(int n){
+        int ans = 1;
+        for(int i = 1;i<=n;i++)ans*=i;
+        return ans;
+    }
+}
+
+
+class Solution {
+    public String getPermutation(int n, int k) {
+        int fact = 1;
+        ArrayList < Integer > numbers = new ArrayList < > ();
+        for (int i = 1; i < n; i++) {
+            fact = fact * i;
+            numbers.add(i);
+        }
+        numbers.add(n);
+        String ans = "";
+        k = k - 1;
+        while (true) {
+            ans = ans + "" + numbers.get(k / fact);
+            numbers.remove(k / fact);
+            if (numbers.size() == 0) {
+                break;
+            }
+
+            k = k % fact;
+            fact = fact / numbers.size();
+        }
+        return ans;
+    }
+}
