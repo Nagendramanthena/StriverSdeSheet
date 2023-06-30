@@ -52,3 +52,49 @@ class Solution {
         return ans;
     }
 }
+
+Type III
+class Solution {
+    public int nextGreaterElement(int n) {
+        List<Integer> dig = new ArrayList<>();
+        while(n>0){
+            int x = n%10;
+            dig.add(0,x);
+            n/=10;
+        }
+        int break_point = -1;
+        int prev = 15;
+        for(int i=0;i<dig.size();i++){
+            if(prev<dig.get(i)){
+                break_point = i-1;
+            }
+            prev = dig.get(i);
+        }
+        
+        if(dig.size() == 1 || break_point  == -1)return -1;
+        else{
+            for(int i = dig.size()-1;i>break_point;i--){
+                if(dig.get(break_point)<dig.get(i)){
+                    int y = dig.get(i);
+                    dig.set(i,dig.get(break_point));
+                    dig.set(break_point,y);
+                    break;
+                }
+            }
+        }
+        //for(int i=break_point+1;i<dig.size())
+        long ans = 0;
+        int y = 0;
+        for(int i = break_point+1;i<dig.size();i++){
+            long pow = (long)dig.get(i)*(long)Math.pow(10,y);
+            ans += (long)pow;
+            y++;
+        }
+        for(int i=break_point;i>=0;i--){
+            long pow = (long)dig.get(i)*(long)Math.pow(10,y);
+            ans += (long)pow;
+            y++;
+        }
+        return (ans>Integer.MAX_VALUE?-1:(int) ans);
+    }
+}
