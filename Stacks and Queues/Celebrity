@@ -1,0 +1,21 @@
+public class Solution {
+	public static int findCelebrity(int n) {
+        // Write your code here.
+		Stack<Integer> st = new Stack<>();
+		for(int i=0;i<n;i++)st.push(i);
+		while(st.size()>1){
+			int id1 = st.pop();
+			int id2 = st.pop();
+
+			if(Runner.knows(id1,id2)){
+				st.push(id2);
+			}
+			else st.push(id1);
+		}
+
+		int cele = st.pop();
+		for(int i=0;i<n;i++)if(i!=cele && Runner.knows(cele,i))return -1;
+		for(int i=0;i<n;i++)if(i!=cele && !Runner.knows(i,cele))return -1;
+		return cele;
+    }
+}
