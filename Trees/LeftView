@@ -1,0 +1,20 @@
+class Tree
+{
+    //Function to return list containing elements of left view of binary tree.
+    ArrayList<Integer> leftView(Node root)
+    {
+      // Your code here
+      ArrayList<Integer> ans = new ArrayList<>();
+      f(root,ans,0);
+      return ans;
+    }
+    
+    void f(Node root,ArrayList<Integer> arr,int level){
+        if(root == null)return;
+        
+        if(level == arr.size())arr.add(root.data);
+        
+        f(root.left,arr,level+1);
+        f(root.right,arr,level+1);
+    }
+}
